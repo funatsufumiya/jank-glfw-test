@@ -7,7 +7,7 @@
   :main jank-glfw-test.main
   :jank {:include-dirs ["include"]
         :library-dirs ["lib"]
-        :linked-libraries ["glfw"]}
+        :linked-libraries ["glfw", "glew"]}
   :profiles {:base {:jank {:output-dir "target/debug"
                            :optimization-level 0}}
              :release {:jank {:output-dir "target/release"

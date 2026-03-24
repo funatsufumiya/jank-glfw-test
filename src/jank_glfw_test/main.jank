@@ -4,12 +4,12 @@
 #define GLFW_DLL
 #include <glfw3.h>
 
-#include <thread>
-#include <chrono>
+// #include <thread>
+// #include <chrono>
 
-void sleep_sec(int sec){
-    std::this_thread::sleep_for(std::chrono::seconds(5));
-}
+// void sleep_sec(int sec){
+//     std::this_thread::sleep_for(std::chrono::seconds(5));
+// }
 
 bool is_nullptr(void* ptr){
     return ptr == nullptr;
@@ -40,7 +40,8 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
     (cpp/glfwMakeContextCurrent window)
     (cpp/glfwSwapInterval 1)
     (while (cpp/! (cpp/glfwWindowShouldClose window))
-      #_(cpp/glClear cpp/GL_COLOR_BUFFER_BIT)
+      (cpp/glClearColor 0.2 0.2 0.5 1.0)
+      (cpp/glClear cpp/GL_COLOR_BUFFER_BIT)
       (cpp/glfwSwapBuffers window)
       (cpp/glfwPollEvents))
     (cpp/glfwTerminate)))
