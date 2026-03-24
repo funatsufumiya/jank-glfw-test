@@ -14,6 +14,13 @@ void sleep_sec(int sec){
 bool is_nullptr(void* ptr){
     return ptr == nullptr;
 }
+          
+static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+  if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+    glfwSetWindowShouldClose(window, GLFW_TRUE);
+}
+          
+
 ")
 
 (defn -main [& args]
@@ -29,11 +36,11 @@ bool is_nullptr(void* ptr){
     (when (cpp/is_nullptr window)
       (cpp/glfwTerminate)
       (throw (ex-info "Error: failed to create glfw window\n" {})))
+    (cpp/glfwSetKeyCallback window cpp/key_callback)
     (cpp/glfwMakeContextCurrent window)
     (cpp/glfwSwapInterval 1)
-    (while (not (cpp/glfwWindowShouldClose window))
+    (while (cpp/! (cpp/glfwWindowShouldClose window))
       #_(cpp/glClear cpp/GL_COLOR_BUFFER_BIT)
       (cpp/glfwSwapBuffers window)
-      (cpp/glfwPollEvents)
-      )
+      (cpp/glfwPollEvents))
     (cpp/glfwTerminate)))
