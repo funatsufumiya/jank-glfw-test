@@ -36,6 +36,4 @@ bool is_nullptr(void* ptr){
       (cpp/glfwSwapBuffers window)
       (cpp/glfwPollEvents)
       )
-    (println "Hello, world!")
-    (cpp/sleep_sec 3)
     (cpp/glfwTerminate)))
