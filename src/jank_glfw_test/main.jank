@@ -1,8 +1,8 @@
 (ns jank-glfw-test.main)
 
 (cpp/raw "
-  #define GLFW_DLL
-  #include <glfw3.h>
+#define GLFW_DLL
+#include <glfw3.h>
 ")
 
 (defn -main [& args]
