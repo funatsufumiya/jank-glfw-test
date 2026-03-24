@@ -19,12 +19,16 @@ bool is_nullptr(void* ptr){
 (defn -main [& args]
   (when (cpp/== (cpp/glfwInit) cpp/GLFW_FALSE)
     (throw (ex-info "Error: failed to init glfw\n" {})))
+
+  (cpp/glfwWindowHint cpp/GLFW_CONTEXT_VERSION_MAJOR 3)
+  (cpp/glfwWindowHint cpp/GLFW_CONTEXT_VERSION_MINOR 2)
+  (cpp/glfwWindowHint cpp/GLFW_OPENGL_FORWARD_COMPAT cpp/GL_TRUE)
+  (cpp/glfwWindowHint cpp/GLFW_OPENGL_PROFILE cpp/GLFW_OPENGL_CORE_PROFILE)
+
   (let [window (cpp/glfwCreateWindow 640 480 "Hello World" cpp/nullptr cpp/nullptr)]
     (when (cpp/is_nullptr window)
       (cpp/glfwTerminate)
       (throw (ex-info "Error: failed to create glfw window\n" {})))
-    (cpp/glfwWindowHint cpp/GLFW_CONTEXT_VERSION_MAJOR 2)
-    (cpp/glfwWindowHint cpp/GLFW_CONTEXT_VERSION_MINOR 1)
     (cpp/glfwMakeContextCurrent window)
     (cpp/glfwSwapInterval 1)
     (println "Hello, world!")
