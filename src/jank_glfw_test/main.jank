@@ -10,12 +10,19 @@
 void sleep_sec(int sec){
     std::this_thread::sleep_for(std::chrono::seconds(5));
 }
+
+bool is_nullptr(void* ptr){
+    return ptr == nullptr;
+}
 ")
 
 (defn -main [& args]
   (when (cpp/== (cpp/glfwInit) cpp/GLFW_FALSE)
     (throw (ex-info "Error: failed to init glfw\n" {})))
   (let [window (cpp/glfwCreateWindow 640 480 "Hello World" cpp/nullptr cpp/nullptr)]
+    (when (cpp/is_nullptr window)
+      (cpp/glfwTerminate)
+      (throw (ex-info "Error: failed to create glfw window\n" {})))
     (println "Hello, world!")
     (cpp/sleep_sec 3)
     (cpp/glfwTerminate)))
