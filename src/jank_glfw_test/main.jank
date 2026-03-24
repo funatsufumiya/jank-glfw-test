@@ -3,10 +3,19 @@
 (cpp/raw "
 #define GLFW_DLL
 #include <glfw3.h>
+
+#include <thread>
+#include <chrono>
+
+void sleep_sec(int sec){
+    std::this_thread::sleep_for(std::chrono::seconds(5));
+}
 ")
 
 (defn -main [& args]
   (when (cpp/== (cpp/glfwInit) cpp/GLFW_FALSE)
     (throw (ex-info "Error: failed to init glfw\n" {})))
-  (println "Hello, world!")
-  (cpp/glfwTerminate))
+  (let [window (cpp/glfwCreateWindow 640 480 "Hello World" cpp/nullptr cpp/nullptr)]
+    (println "Hello, world!")
+    (cpp/sleep_sec 3)
+    (cpp/glfwTerminate)))
