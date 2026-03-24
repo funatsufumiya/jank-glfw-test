@@ -1,0 +1,6 @@
+(ns jank-glfw-test.main)
+
+(cpp/raw "#include <GLFW/glfw3.h>")
+
+(defn -main [& args]
+  (println "Hello, world!"))
