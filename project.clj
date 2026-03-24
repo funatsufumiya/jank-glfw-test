@@ -5,6 +5,9 @@
   :plugins [[org.jank-lang/lein-jank "0.6"]]
   :middleware [leiningen.jank/middleware]
   :main jank-glfw-test.main
+  :jank {:include-dirs ["include"]
+        :library-dirs ["lib"]
+        :linked-libraries ["glfw"]}
   :profiles {:base {:jank {:output-dir "target/debug"
                            :optimization-level 0}}
              :release {:jank {:output-dir "target/release"

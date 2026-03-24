@@ -1,6 +1,11 @@
 (ns jank-glfw-test.main)
 
-(cpp/raw "#include <GLFW/glfw3.h>")
+(cpp/raw "
+   #define GLFW_DLL
+   #include <glfw3.h>
+")
 
 (defn -main [& args]
+  (when (cpp/== (cpp/glfwInit) cpp/GLFW_FALSE)
+    (throw (ex-info "Error: failed to init glfw\n" {})))
   (println "Hello, world!"))
